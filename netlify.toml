@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/clickwee-connect.zip"
+  [headers.values]
+    Content-Disposition = "attachment; filename=\"clickwee-connect.zip\""
