@@ -1,0 +1,3 @@
+# Keep exact bytes (CRLF, no BOM) so GitHub Pages serves a working batch file
+*.bat -text
+*.ps1 -text
