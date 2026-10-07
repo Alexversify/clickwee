@@ -22,6 +22,7 @@ exit /b 0
 # Clickwee cursor helper for Windows 10/11 (no admin required)
 #  -Install   : register clickwee:// link so the website can apply cursors
 #  -Uri       : called by the browser, e.g. clickwee://apply/Bibata-Modern-Classic/Large
+#               (the theme is looked up in catalog.json, built by tools/build_catalog.py)
 #  -Uninstall : remove link and restore original cursors
 #  -Theme X [-Size Regular|Large|Extra-Large] : apply directly (for testing)
 # This file is embedded in Clickwee-Connect.bat by tools/build_connect.py.
@@ -33,7 +34,7 @@ $ProgressPreference = "SilentlyContinue"
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -bor [Net.SecurityProtocolType]'Tls13' }
 catch { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 }
 
-$Version   = 2
+$Version   = 3
 $home2     = Join-Path $env:LOCALAPPDATA "Clickwee"
 $cache     = Join-Path $home2 "cache"
 $backupJs  = Join-Path $home2 "cursor-backup.json"
@@ -42,28 +43,15 @@ $cursorKey = "Control Panel\Cursors"
 $proto     = "HKCU:\Software\Classes\clickwee"
 $uninstKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Clickwee"
 
-# All themes: ful1e5 open-source cursors, GPL-3.0 (commercial use allowed).
-$gh = "https://github.com/ful1e5"
-$urls = [ordered]@{
-  "Bibata-Modern-Classic"   = "$gh/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic-Windows.zip"
-  "Bibata-Modern-Ice"       = "$gh/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Ice-Windows.zip"
-  "Bibata-Modern-Amber"     = "$gh/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Amber-Windows.zip"
-  "Bibata-Original-Classic" = "$gh/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Classic-Windows.zip"
-  "Bibata-Original-Ice"     = "$gh/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Ice-Windows.zip"
-  "XCursor-Dark"            = "$gh/XCursor-pro/releases/download/v2.0.2/XCursor-Pro-Dark-Windows.zip"
-  "XCursor-Light"           = "$gh/XCursor-pro/releases/download/v2.0.2/XCursor-Pro-Light-Windows.zip"
-  "XCursor-Pro-Red"         = "$gh/XCursor-pro/releases/download/v2.0.2/XCursor-Pro-Red-Windows.zip"
-  "macOS-Black"             = "$gh/apple_cursor/releases/download/v2.0.1/macOS-Windows.zip"
-  "macOS-White"             = "$gh/apple_cursor/releases/download/v2.0.1/macOS-White-Windows.zip"
-  "GoogleDot-Black"         = "$gh/Google_Cursor/releases/download/v2.0.0/GoogleDot-Black-Windows.zip"
-  "GoogleDot-White"         = "$gh/Google_Cursor/releases/download/v2.0.0/GoogleDot-White-Windows.zip"
-  "GoogleDot-Blue"          = "$gh/Google_Cursor/releases/download/v2.0.0/GoogleDot-Blue-Windows.zip"
-  "GoogleDot-Red"           = "$gh/Google_Cursor/releases/download/v2.0.0/GoogleDot-Red-Windows.zip"
-  "Fuchsia"                 = "$gh/fuchsia-cursor/releases/download/v2.0.1/Fuchsia-Windows.zip"
-  "Fuchsia-Amber"           = "$gh/fuchsia-cursor/releases/download/v2.0.1/Fuchsia-Amber-Windows.zip"
-  "Banana"                  = "$gh/banana-cursor/releases/download/v2.0.0/Banana-Windows.zip"
-  "Banana-Blue"             = "$gh/banana-cursor/releases/download/v2.0.0/Banana-Blue-Windows.zip"
-}
+# The theme list lives in catalog.json on the website, so new cursors work without
+# re-running the connect file. Downloads are only accepted from these places.
+$catalogUrls = @(
+  "https://raw.githubusercontent.com/Alexversify/clickwee/main/catalog.json",
+  "https://cdn.jsdelivr.net/gh/Alexversify/clickwee@main/catalog.json",
+  "https://clickwee.com/catalog.json"
+)
+$allowed = '^https://(github\.com/|raw\.githubusercontent\.com/Alexversify/clickwee/|cdn\.jsdelivr\.net/gh/Alexversify/clickwee@)'
+$catalogFile = Join-Path $home2 "catalog.json"
 $sizes = @("Regular","Large","Extra-Large")
 
 # Windows role = file names used by the ful1e5 builds (spellings vary per project)
@@ -137,31 +125,57 @@ function Restore-Original {
 }
 
 # --- download: Invoke-WebRequest, then curl.exe (built into Windows 10 1803+) ---
-function Get-File($url, $out) {
-  try {
-    Invoke-WebRequest $url -OutFile $out -UseBasicParsing -TimeoutSec 120
-    return
-  } catch { $first = $_.Exception.Message }
-  $curl = Join-Path $env:SystemRoot "System32\curl.exe"
-  if (Test-Path $curl) {
-    $ErrorActionPreference = "Continue"   # PS 5.1 turns native stderr into an error under Stop
-    & $curl -fsL --retry 2 --ssl-revoke-best-effort -o $out $url 2>&1 | Out-Null
-    if ($LASTEXITCODE -ne 0) { & $curl -fsL --retry 2 -o $out $url 2>&1 | Out-Null }
-    $ErrorActionPreference = "Stop"
-    if ($LASTEXITCODE -eq 0 -and (Test-Path $out)) { return }
+function Get-File($urlList, $out) {
+  $first = ""
+  foreach ($url in @($urlList)) {
+    try {
+      Invoke-WebRequest $url -OutFile $out -UseBasicParsing -TimeoutSec 120
+      return
+    } catch { if (-not $first) { $first = $_.Exception.Message } }
+    $curl = Join-Path $env:SystemRoot "System32\curl.exe"
+    if (Test-Path $curl) {
+      $ErrorActionPreference = "Continue"   # PS 5.1 turns native stderr into an error under Stop
+      & $curl -fsL --retry 2 --ssl-revoke-best-effort -o $out $url 2>&1 | Out-Null
+      if ($LASTEXITCODE -ne 0) { & $curl -fsL --retry 2 -o $out $url 2>&1 | Out-Null }
+      $ok = $LASTEXITCODE -eq 0
+      $ErrorActionPreference = "Stop"
+      if ($ok -and (Test-Path $out)) { return }
+    }
   }
-  throw "커서 파일을 내려받지 못했습니다. 인터넷 연결이나 보안 프로그램을 확인해 주세요.`n($first)"
+  throw "파일을 내려받지 못했습니다. 인터넷 연결이나 보안 프로그램을 확인해 주세요.`n($first)"
 }
 
-function Get-Package($t) {
-  $pkg = Join-Path $cache $t
+function Get-ThemeInfo($t, $s) {
+  New-Item -ItemType Directory -Force -Path $home2 | Out-Null
+  $tmp = "$catalogFile.part"
+  try {
+    Get-File $catalogUrls $tmp
+    Move-Item $tmp $catalogFile -Force
+  } catch {
+    Remove-Item $tmp -Force -ErrorAction SilentlyContinue
+    if (-not (Test-Path $catalogFile)) { throw }
+  }
+  $cat = [IO.File]::ReadAllText($catalogFile, [Text.Encoding]::UTF8) | ConvertFrom-Json
+  $info = $cat.themes | Where-Object { $_.id -eq $t } | Select-Object -First 1
+  if (-not $info) { throw "'$t' 커서를 찾지 못했습니다. 페이지를 새로고침한 뒤 다시 눌러 주세요." }
+  # packs converted by Clickwee come per size: .../packs/<id>/{size}.zip
+  $perSize = @($info.urls | Where-Object { $_ -like "*{size}*" }).Count -gt 0
+  $urls = @($info.urls | ForEach-Object { $_.Replace("{size}", $s) } | Where-Object { $_ -match $allowed })
+  if (-not $urls.Count) { throw "허용되지 않은 다운로드 주소입니다." }
+  $key = "$($info.id)-$($info.rev -replace '[^A-Za-z0-9]', '')"
+  if ($perSize) { $key += "-$s" }
+  return [pscustomobject]@{ key = $key; urls = $urls; name = $info.name }
+}
+
+function Get-Package($info) {
+  $pkg = Join-Path $cache $info.key
   if (Test-Path (Join-Path $pkg ".ok")) { return $pkg }
   Notify "커서를 내려받는 중입니다. 잠시만 기다려 주세요."
   New-Item -ItemType Directory -Force -Path $cache | Out-Null
   $tmp = Join-Path $cache ("_" + [guid]::NewGuid().ToString("N"))
   $zip = "$tmp.zip"
   try {
-    Get-File $urls[$t] $zip
+    Get-File $info.urls $zip
     [IO.Compression.ZipFile]::ExtractToDirectory($zip, $tmp)
     Set-Content (Join-Path $tmp ".ok") "ok"
     if (-not (Test-Path (Join-Path $pkg ".ok"))) {   # another click may have finished first
@@ -176,12 +190,11 @@ function Get-Package($t) {
 }
 
 function Apply-Theme($t, $s) {
-  if (-not $urls.Contains($t)) {
-    throw "이 연결 파일은 '$t' 커서를 모릅니다.`nclickwee.com에서 연결 파일을 다시 받아 한 번 실행해 주세요."
-  }
+  if ($t -notmatch '^[A-Za-z0-9_.-]+$') { throw "잘못된 커서 이름입니다: $t" }
   if ($sizes -notcontains $s) { $s = "Regular" }
+  $info = Get-ThemeInfo $t $s
   Backup
-  $pkg = Get-Package $t
+  $pkg = Get-Package $info
   $src = Get-ChildItem $pkg -Directory | Where-Object {
     $_.Name -like "*-$s-Windows" -and ($s -ne "Large" -or $_.Name -notlike "*Extra-Large*")
   } | Select-Object -First 1
@@ -209,6 +222,11 @@ function Apply-Theme($t, $s) {
   $sk.SetValue($scheme, ($values -join ","), [Microsoft.Win32.RegistryValueKind]::ExpandString)
   $sk.Close()
   Update-Cursors
+  # drop older downloads; the current theme's folder stays because the registry points at it
+  Get-ChildItem $cache -Directory -ErrorAction SilentlyContinue |
+    Where-Object { $_.FullName -ne $pkg -and $_.Name -notlike "_*" } |
+    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+  return $info.name
 }
 
 function Remove-Link {
@@ -265,8 +283,8 @@ try {
       "apply" {
         if ($parts.Count -lt 2) { break }
         $s = "Regular"; if ($parts.Count -ge 3) { $s = $parts[2] }
-        Apply-Theme $parts[1] $s
-        Notify "$($parts[1]) 커서를 적용했습니다."
+        $name = Apply-Theme $parts[1] $s
+        Notify "$name 커서를 적용했습니다."
         Close-Tray
         return
       }
@@ -274,7 +292,7 @@ try {
     throw "잘못된 링크입니다: $Uri"
   }
   if ($Restore) { Restore-Original | Out-Null; return }
-  if ($Theme) { Apply-Theme $Theme $Size; Write-Host "Done." -ForegroundColor Green; return }
+  if ($Theme) { Apply-Theme $Theme $Size | Out-Null; Write-Host "Done." -ForegroundColor Green; return }
 } catch {
   if ($script:tray) { $script:tray.Dispose() }
   if ($Uri) { Say ("커서를 적용하지 못했습니다.`n`n" + $_.Exception.Message) "Error" } else { throw }

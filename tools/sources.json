@@ -1,0 +1,1228 @@
+[
+ {
+  "id": "Bibata-Modern-Classic",
+  "name": "Bibata Modern Classic",
+  "desc": "둥근 모서리, 블랙. 가장 인기 있는 커서",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic-Windows.zip"
+ },
+ {
+  "id": "Bibata-Modern-Ice",
+  "name": "Bibata Modern Ice",
+  "desc": "둥근 모서리, 화이트",
+  "tags": [
+   "white",
+   "modern"
+  ],
+  "dark": true,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Ice-Windows.zip"
+ },
+ {
+  "id": "Bibata-Modern-Amber",
+  "name": "Bibata Modern Amber",
+  "desc": "둥근 모서리, 오렌지",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Amber-Windows.zip"
+ },
+ {
+  "id": "Bibata-Original-Classic",
+  "name": "Bibata Original Classic",
+  "desc": "뾰족한 모서리, 블랙",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Classic-Windows.zip"
+ },
+ {
+  "id": "Bibata-Original-Ice",
+  "name": "Bibata Original Ice",
+  "desc": "뾰족한 모서리, 화이트",
+  "tags": [
+   "white",
+   "modern"
+  ],
+  "dark": true,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Ice-Windows.zip"
+ },
+ {
+  "id": "Bibata-Original-Amber",
+  "name": "Bibata Original Amber",
+  "desc": "뾰족한 모서리, 오렌지",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Amber-Windows.zip"
+ },
+ {
+  "id": "Bibata-Modern-Classic-Right",
+  "name": "Bibata Classic 왼손용",
+  "desc": "왼손잡이를 위한 반전 블랙",
+  "tags": [
+   "black",
+   "modern",
+   "lefty"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic-Right-Windows.zip"
+ },
+ {
+  "id": "Bibata-Modern-Ice-Right",
+  "name": "Bibata Ice 왼손용",
+  "desc": "왼손잡이를 위한 반전 화이트",
+  "tags": [
+   "white",
+   "modern",
+   "lefty"
+  ],
+  "dark": true,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Ice-Right-Windows.zip"
+ },
+ {
+  "id": "BreezeX-Black",
+  "name": "BreezeX Black",
+  "desc": "KDE Breeze를 다듬은 블랙",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/BreezeX_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Black-Windows.zip"
+ },
+ {
+  "id": "BreezeX-Dark",
+  "name": "BreezeX Dark",
+  "desc": "KDE Breeze를 다듬은 다크 그레이",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/BreezeX_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Dark-Windows.zip"
+ },
+ {
+  "id": "BreezeX-Light",
+  "name": "BreezeX Light",
+  "desc": "KDE Breeze를 다듬은 화이트",
+  "tags": [
+   "white",
+   "modern"
+  ],
+  "dark": true,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/BreezeX_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Light-Windows.zip"
+ },
+ {
+  "id": "XCursor-Dark",
+  "name": "XCursor Pro Dark",
+  "desc": "날카롭고 미니멀한 블랙",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/XCursor-pro",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/XCursor-pro/releases/download/v2.0.2/XCursor-Pro-Dark-Windows.zip"
+ },
+ {
+  "id": "XCursor-Light",
+  "name": "XCursor Pro Light",
+  "desc": "날카롭고 미니멀한 화이트",
+  "tags": [
+   "white",
+   "modern"
+  ],
+  "dark": true,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/XCursor-pro",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/XCursor-pro/releases/download/v2.0.2/XCursor-Pro-Light-Windows.zip"
+ },
+ {
+  "id": "XCursor-Pro-Red",
+  "name": "XCursor Pro Red",
+  "desc": "날카롭고 미니멀한 레드",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/XCursor-pro",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/XCursor-pro/releases/download/v2.0.2/XCursor-Pro-Red-Windows.zip"
+ },
+ {
+  "id": "macOS-Black",
+  "name": "macOS Black",
+  "desc": "맥 스타일, 블랙",
+  "tags": [
+   "black",
+   "mac"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/apple_cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/apple_cursor/releases/download/v2.0.1/macOS-Windows.zip"
+ },
+ {
+  "id": "macOS-White",
+  "name": "macOS White",
+  "desc": "맥 스타일, 화이트",
+  "tags": [
+   "white",
+   "mac"
+  ],
+  "dark": true,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/apple_cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/apple_cursor/releases/download/v2.0.1/macOS-White-Windows.zip"
+ },
+ {
+  "id": "GoogleDot-Black",
+  "name": "GoogleDot Black",
+  "desc": "동그란 점 형태, 블랙",
+  "tags": [
+   "black",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Google_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Google_Cursor/releases/download/v2.0.0/GoogleDot-Black-Windows.zip"
+ },
+ {
+  "id": "GoogleDot-White",
+  "name": "GoogleDot White",
+  "desc": "동그란 점 형태, 화이트",
+  "tags": [
+   "white",
+   "cute"
+  ],
+  "dark": true,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Google_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Google_Cursor/releases/download/v2.0.0/GoogleDot-White-Windows.zip"
+ },
+ {
+  "id": "GoogleDot-Blue",
+  "name": "GoogleDot Blue",
+  "desc": "동그란 점 형태, 블루",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Google_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Google_Cursor/releases/download/v2.0.0/GoogleDot-Blue-Windows.zip"
+ },
+ {
+  "id": "GoogleDot-Red",
+  "name": "GoogleDot Red",
+  "desc": "동그란 점 형태, 레드",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Google_Cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/Google_Cursor/releases/download/v2.0.0/GoogleDot-Red-Windows.zip"
+ },
+ {
+  "id": "Fuchsia",
+  "name": "Fuchsia Pink",
+  "desc": "물방울 형태, 핑크",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/fuchsia-cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/fuchsia-cursor/releases/download/v2.0.1/Fuchsia-Windows.zip"
+ },
+ {
+  "id": "Fuchsia-Red",
+  "name": "Fuchsia Red",
+  "desc": "물방울 형태, 레드",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/fuchsia-cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/fuchsia-cursor/releases/download/v2.0.1/Fuchsia-Red-Windows.zip"
+ },
+ {
+  "id": "Fuchsia-Amber",
+  "name": "Fuchsia Amber",
+  "desc": "물방울 형태, 옐로",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/fuchsia-cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/fuchsia-cursor/releases/download/v2.0.1/Fuchsia-Amber-Windows.zip"
+ },
+ {
+  "id": "Banana",
+  "name": "Banana",
+  "desc": "노란 바나나 모양, 재미있는 커서",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/banana-cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/banana-cursor/releases/download/v2.0.0/Banana-Windows.zip"
+ },
+ {
+  "id": "Banana-Green",
+  "name": "Banana Green",
+  "desc": "초록 바나나 모양, 재미있는 커서",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/banana-cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/banana-cursor/releases/download/v2.0.0/Banana-Green-Windows.zip"
+ },
+ {
+  "id": "Banana-Blue",
+  "name": "Banana Blue",
+  "desc": "파란 바나나 모양, 재미있는 커서",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/banana-cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/banana-cursor/releases/download/v2.0.0/Banana-Blue-Windows.zip"
+ },
+ {
+  "id": "Banana-Red",
+  "name": "Banana Red",
+  "desc": "빨간 바나나 모양, 재미있는 커서",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/banana-cursor",
+  "kind": "upstream",
+  "zip": "https://github.com/ful1e5/banana-cursor/releases/download/v2.0.0/Banana-Red-Windows.zip"
+ },
+ {
+  "id": "Bibata-Modern-DarkRed",
+  "name": "Bibata Modern DarkRed",
+  "desc": "둥근 모서리, 다크 레드",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Extra_Cursor",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/ful1e5/Bibata_Extra_Cursor/releases/download/v1.0.1/Bibata-Modern-DarkRed.tar.gz"
+  },
+  "path": "Bibata-Modern-DarkRed/cursors"
+ },
+ {
+  "id": "Bibata-Modern-DodgerBlue",
+  "name": "Bibata Modern DodgerBlue",
+  "desc": "둥근 모서리, 블루",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Extra_Cursor",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/ful1e5/Bibata_Extra_Cursor/releases/download/v1.0.1/Bibata-Modern-DodgerBlue.tar.gz"
+  },
+  "path": "Bibata-Modern-DodgerBlue/cursors"
+ },
+ {
+  "id": "Bibata-Modern-Pink",
+  "name": "Bibata Modern Pink",
+  "desc": "둥근 모서리, 핑크",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Extra_Cursor",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/ful1e5/Bibata_Extra_Cursor/releases/download/v1.0.1/Bibata-Modern-Pink.tar.gz"
+  },
+  "path": "Bibata-Modern-Pink/cursors"
+ },
+ {
+  "id": "Bibata-Modern-Turquoise",
+  "name": "Bibata Modern Turquoise",
+  "desc": "둥근 모서리, 민트",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Extra_Cursor",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/ful1e5/Bibata_Extra_Cursor/releases/download/v1.0.1/Bibata-Modern-Turquoise.tar.gz"
+  },
+  "path": "Bibata-Modern-Turquoise/cursors"
+ },
+ {
+  "id": "Bibata-Original-DarkRed",
+  "name": "Bibata Original DarkRed",
+  "desc": "뾰족한 모서리, 다크 레드",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Extra_Cursor",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/ful1e5/Bibata_Extra_Cursor/releases/download/v1.0.1/Bibata-Original-DarkRed.tar.gz"
+  },
+  "path": "Bibata-Original-DarkRed/cursors"
+ },
+ {
+  "id": "Bibata-Original-DodgerBlue",
+  "name": "Bibata Original DodgerBlue",
+  "desc": "뾰족한 모서리, 블루",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Extra_Cursor",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/ful1e5/Bibata_Extra_Cursor/releases/download/v1.0.1/Bibata-Original-DodgerBlue.tar.gz"
+  },
+  "path": "Bibata-Original-DodgerBlue/cursors"
+ },
+ {
+  "id": "Bibata-Original-Pink",
+  "name": "Bibata Original Pink",
+  "desc": "뾰족한 모서리, 핑크",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Extra_Cursor",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/ful1e5/Bibata_Extra_Cursor/releases/download/v1.0.1/Bibata-Original-Pink.tar.gz"
+  },
+  "path": "Bibata-Original-Pink/cursors"
+ },
+ {
+  "id": "Bibata-Original-Turquoise",
+  "name": "Bibata Original Turquoise",
+  "desc": "뾰족한 모서리, 민트",
+  "tags": [
+   "color",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Extra_Cursor",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/ful1e5/Bibata_Extra_Cursor/releases/download/v1.0.1/Bibata-Original-Turquoise.tar.gz"
+  },
+  "path": "Bibata-Original-Turquoise/cursors"
+ },
+ {
+  "id": "Phinger-Light",
+  "name": "Phinger Light",
+  "desc": "손가락 모양이 귀여운 화이트",
+  "tags": [
+   "white",
+   "cute"
+  ],
+  "dark": true,
+  "author": "Philipp Schaffrath",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "https://github.com/phisch/phinger-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/phisch/phinger-cursors/releases/download/v2.1/phinger-cursors-variants.tar.bz2"
+  },
+  "path": "phinger-cursors-light/cursors"
+ },
+ {
+  "id": "Phinger-Dark",
+  "name": "Phinger Dark",
+  "desc": "손가락 모양이 귀여운 블랙",
+  "tags": [
+   "black",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Philipp Schaffrath",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "https://github.com/phisch/phinger-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/phisch/phinger-cursors/releases/download/v2.1/phinger-cursors-variants.tar.bz2"
+  },
+  "path": "phinger-cursors-dark/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-dark",
+  "name": "Catppuccin Mocha Dark",
+  "desc": "파스텔 톤 다크",
+  "tags": [
+   "black",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-dark-cursors.zip"
+  },
+  "path": "catppuccin-mocha-dark-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-latte-light",
+  "name": "Catppuccin Latte Light",
+  "desc": "파스텔 톤 라이트",
+  "tags": [
+   "white",
+   "cute"
+  ],
+  "dark": true,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-latte-light-cursors.zip"
+  },
+  "path": "catppuccin-latte-light-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-mauve",
+  "name": "Catppuccin Mauve",
+  "desc": "파스텔 보라",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-mauve-cursors.zip"
+  },
+  "path": "catppuccin-mocha-mauve-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-pink",
+  "name": "Catppuccin Pink",
+  "desc": "파스텔 핑크",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-pink-cursors.zip"
+  },
+  "path": "catppuccin-mocha-pink-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-red",
+  "name": "Catppuccin Red",
+  "desc": "파스텔 레드",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-red-cursors.zip"
+  },
+  "path": "catppuccin-mocha-red-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-peach",
+  "name": "Catppuccin Peach",
+  "desc": "파스텔 피치",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-peach-cursors.zip"
+  },
+  "path": "catppuccin-mocha-peach-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-yellow",
+  "name": "Catppuccin Yellow",
+  "desc": "파스텔 옐로",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-yellow-cursors.zip"
+  },
+  "path": "catppuccin-mocha-yellow-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-green",
+  "name": "Catppuccin Green",
+  "desc": "파스텔 그린",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-green-cursors.zip"
+  },
+  "path": "catppuccin-mocha-green-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-teal",
+  "name": "Catppuccin Teal",
+  "desc": "파스텔 청록",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-teal-cursors.zip"
+  },
+  "path": "catppuccin-mocha-teal-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-blue",
+  "name": "Catppuccin Blue",
+  "desc": "파스텔 블루",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-blue-cursors.zip"
+  },
+  "path": "catppuccin-mocha-blue-cursors/cursors"
+ },
+ {
+  "id": "Catppuccin-mocha-lavender",
+  "name": "Catppuccin Lavender",
+  "desc": "파스텔 라벤더",
+  "tags": [
+   "color",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "archive": "https://github.com/catppuccin/cursors/releases/download/v2.0.0/catppuccin-mocha-lavender-cursors.zip"
+  },
+  "path": "catppuccin-mocha-lavender-cursors/cursors"
+ },
+ {
+  "id": "Vimix-Dark",
+  "name": "Vimix Dark",
+  "desc": "부드러운 곡선, 블랙",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Vimix-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Vimix-cursors.git"
+  },
+  "path": "dist/cursors"
+ },
+ {
+  "id": "Vimix-White",
+  "name": "Vimix White",
+  "desc": "부드러운 곡선, 화이트",
+  "tags": [
+   "white",
+   "modern"
+  ],
+  "dark": true,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Vimix-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Vimix-cursors.git"
+  },
+  "path": "dist-white/cursors"
+ },
+ {
+  "id": "WhiteSur",
+  "name": "WhiteSur",
+  "desc": "맥 느낌의 깔끔한 블랙",
+  "tags": [
+   "black",
+   "mac"
+  ],
+  "dark": false,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/WhiteSur-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/WhiteSur-cursors.git"
+  },
+  "path": "dist/cursors"
+ },
+ {
+  "id": "McMojave",
+  "name": "McMojave",
+  "desc": "맥 모하비 느낌",
+  "tags": [
+   "black",
+   "mac"
+  ],
+  "dark": false,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/McMojave-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/McMojave-cursors.git"
+  },
+  "path": "dist/cursors"
+ },
+ {
+  "id": "Layan",
+  "name": "Layan",
+  "desc": "보라빛 포인트의 화이트",
+  "tags": [
+   "white",
+   "color"
+  ],
+  "dark": true,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Layan-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Layan-cursors.git"
+  },
+  "path": "dist/cursors"
+ },
+ {
+  "id": "Layan-Border",
+  "name": "Layan Border",
+  "desc": "테두리가 또렷한 Layan",
+  "tags": [
+   "white",
+   "color"
+  ],
+  "dark": true,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Layan-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Layan-cursors.git"
+  },
+  "path": "dist-border/cursors"
+ },
+ {
+  "id": "Layan-White",
+  "name": "Layan White",
+  "desc": "깨끗한 화이트",
+  "tags": [
+   "white"
+  ],
+  "dark": true,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Layan-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Layan-cursors.git"
+  },
+  "path": "dist-white/cursors"
+ },
+ {
+  "id": "Graphite-Dark",
+  "name": "Graphite Dark",
+  "desc": "차분한 그래파이트 블랙",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Graphite-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Graphite-cursors.git"
+  },
+  "path": "dist-dark/cursors"
+ },
+ {
+  "id": "Graphite-Light",
+  "name": "Graphite Light",
+  "desc": "차분한 그래파이트 화이트",
+  "tags": [
+   "white",
+   "modern"
+  ],
+  "dark": true,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Graphite-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Graphite-cursors.git"
+  },
+  "path": "dist-light/cursors"
+ },
+ {
+  "id": "Graphite-Dark-Nord",
+  "name": "Graphite Nord Dark",
+  "desc": "북유럽 톤 다크",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Graphite-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Graphite-cursors.git"
+  },
+  "path": "dist-dark-nord/cursors"
+ },
+ {
+  "id": "Graphite-Light-Nord",
+  "name": "Graphite Nord Light",
+  "desc": "북유럽 톤 라이트",
+  "tags": [
+   "white",
+   "modern"
+  ],
+  "dark": true,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Graphite-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Graphite-cursors.git"
+  },
+  "path": "dist-light-nord/cursors"
+ },
+ {
+  "id": "Qogir",
+  "name": "Qogir",
+  "desc": "블루 포인트의 블랙",
+  "tags": [
+   "black",
+   "color"
+  ],
+  "dark": false,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Qogir-icon-theme",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Qogir-icon-theme.git"
+  },
+  "path": "src/cursors/dist/cursors"
+ },
+ {
+  "id": "Qogir-Dark",
+  "name": "Qogir White",
+  "desc": "블루 포인트의 화이트",
+  "tags": [
+   "white",
+   "color"
+  ],
+  "dark": true,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Qogir-icon-theme",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Qogir-icon-theme.git"
+  },
+  "path": "src/cursors/dist-Dark/cursors"
+ },
+ {
+  "id": "Qogir-Manjaro",
+  "name": "Qogir Manjaro",
+  "desc": "그린 포인트의 블랙",
+  "tags": [
+   "black",
+   "color"
+  ],
+  "dark": false,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Qogir-icon-theme",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Qogir-icon-theme.git"
+  },
+  "path": "src/cursors/dist-Manjaro/cursors"
+ },
+ {
+  "id": "Qogir-Ubuntu",
+  "name": "Qogir Ubuntu",
+  "desc": "오렌지 포인트의 블랙",
+  "tags": [
+   "black",
+   "color"
+  ],
+  "dark": false,
+  "author": "vinceliuice",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/vinceliuice/Qogir-icon-theme",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/vinceliuice/Qogir-icon-theme.git"
+  },
+  "path": "src/cursors/dist-Ubuntu/cursors"
+ },
+ {
+  "id": "Future",
+  "name": "Future",
+  "desc": "미래적인 각진 디자인",
+  "tags": [
+   "black",
+   "modern"
+  ],
+  "dark": false,
+  "author": "yeyushengfan258",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/yeyushengfan258/Future-cursors",
+  "kind": "xcursor",
+  "fetch": {
+   "git": "https://github.com/yeyushengfan258/Future-cursors.git"
+  },
+  "path": "dist/cursors"
+ },
+ {
+  "id": "Rainbow-Modern",
+  "name": "Rainbow Modern",
+  "desc": "무지개색으로 계속 바뀌는 움직이는 커서",
+  "tags": [
+   "color",
+   "anim",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "recolor",
+  "base": "Bibata-Modern-Classic",
+  "effect": "rainbow"
+ },
+ {
+  "id": "Rainbow-Original",
+  "name": "Rainbow Original",
+  "desc": "뾰족한 무지개 움직이는 커서",
+  "tags": [
+   "color",
+   "anim",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "recolor",
+  "base": "Bibata-Original-Classic",
+  "effect": "rainbow"
+ },
+ {
+  "id": "Neon-Pulse",
+  "name": "Neon Pulse",
+  "desc": "네온처럼 숨쉬듯 빛나는 커서",
+  "tags": [
+   "color",
+   "anim",
+   "modern"
+  ],
+  "dark": true,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "recolor",
+  "base": "Bibata-Modern-Ice",
+  "effect": "neon"
+ },
+ {
+  "id": "Neon-Pink",
+  "name": "Neon Pink",
+  "desc": "핑크 네온이 빛나는 커서",
+  "tags": [
+   "color",
+   "anim",
+   "cute"
+  ],
+  "dark": true,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "recolor",
+  "base": "Bibata-Modern-Ice",
+  "effect": "neon-pink"
+ },
+ {
+  "id": "Rainbow-Dot",
+  "name": "Rainbow Dot",
+  "desc": "색이 흐르는 동그란 점",
+  "tags": [
+   "color",
+   "anim",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Google_Cursor",
+  "kind": "recolor",
+  "base": "GoogleDot-Black",
+  "effect": "rainbow"
+ }
+]
