@@ -202,7 +202,7 @@ footer a{color:inherit}
   <section class="setup" id="setup">
     <div>
       <h2>처음 한 번만 연결하면 됩니다</h2>
-      <p>웹페이지는 보안상 PC 설정을 직접 바꿀 수 없어서, 작은 연결 파일이 버튼 신호를 받아 커서를 바꿉니다. 관리자 권한이 필요 없고 언제든 해제할 수 있습니다. 새 커서가 추가돼도 다시 받을 필요가 없습니다.</p>
+      <p>웹페이지는 보안상 PC 설정을 직접 바꿀 수 없어서, 작은 연결 파일이 버튼 신호를 받아 커서를 바꿉니다. 관리자 권한이 필요 없고 언제든 해제할 수 있습니다. 새 커서가 추가되거나 연결 파일이 업데이트돼도 자동으로 반영됩니다. 예전에 받은 연결 파일에서 "커서를 모릅니다"가 뜨면 한 번만 새로 받아 실행해 주세요.</p>
     </div>
     <ol class="steps">
       <li><h3>연결 파일 받기</h3><p>Windows 10, 11용 작은 파일 하나입니다. 크롬이 위험하다고 물으면 유지를 누르세요.</p><a class="btn" id="dlBtn" href="Clickwee-Connect.bat" download>연결 파일 받기 (1회)</a></li>
@@ -213,7 +213,7 @@ footer a{color:inherit}
 
   <section class="credits" id="credits">
     <h2>만든 사람들</h2>
-    <p>모든 커서는 상업적 이용과 재배포가 허용된 오픈소스 라이선스(GPL, CC BY-SA)로 공개된 작품입니다. 리눅스 전용으로 나온 커서는 Clickwee가 Windows 형식으로 변환했고, 움직이는 에디션은 Bibata와 GoogleDot에 색 애니메이션을 더한 것입니다. 변환본과 변환 도구는 같은 라이선스로 <a href="https://github.com/Alexversify/clickwee">공개</a>되어 있습니다. macOS, Google 등은 각 회사의 상표이며 Clickwee와 관계없습니다.</p>
+    <p>모든 커서는 상업적 이용과 재배포가 허용된 오픈소스 라이선스(GPL, CC BY-SA)로 공개된 작품입니다. 리눅스 전용으로 나온 커서는 Clickwee가 Windows 형식으로 변환했고, 움직이는 에디션은 Bibata, GoogleDot, Banana, Fuchsia, Catppuccin에 색 변화와 통통 튀기, 흔들림 애니메이션을 더한 것입니다. 변환본과 변환 도구는 같은 라이선스로 <a href="https://github.com/Alexversify/clickwee">공개</a>되어 있습니다. macOS, Google 등은 각 회사의 상표이며 Clickwee와 관계없습니다.</p>
     <ul id="creditList"></ul>
   </section>
 
@@ -390,9 +390,9 @@ document.querySelectorAll("#sizes button").forEach(b=>{
   chip.addEventListener("pointerup", ()=>on=false);
 })();
 
-// connection state (per browser convenience only). v3 = connect file that reads catalog.json
-function getConnected(){ try { return localStorage.getItem("cw-connected-v3")==="1"; } catch(e){ return false; } }
-function setConnected(){ try { localStorage.setItem("cw-connected-v3","1"); } catch(e){} renderStatus(); }
+// connection state (per browser convenience only). v4 = connect file that reads catalog.json and updates itself
+function getConnected(){ try { return localStorage.getItem("cw-connected-v4")==="1"; } catch(e){ return false; } }
+function setConnected(){ try { localStorage.setItem("cw-connected-v4","1"); } catch(e){} renderStatus(); }
 function renderStatus(){
   $("status").innerHTML = getConnected() ? "PC 연결됨 <b>●</b>" : "PC 연결 안 됨";
 }
@@ -414,7 +414,10 @@ function showNote(url, label){
     return;
   }
   if (!getConnected()) {
-    note.innerHTML = `처음이거나 예전에 연결했다면 아래 <a class="linkbtn" href="#setup">연결 파일</a>을 한 번 받아 실행해 주세요. 연결했는데 반응이 없으면 <kbd>Win</kbd>+<kbd>R</kbd>을 누르고 이 주소를 붙여넣으세요: <code></code> <button class="linkbtn" id="copyBtn">복사</button>`;
+    note.innerHTML = `<b>새 연결 파일이 필요합니다 (한 번만).</b> 처음이거나 예전 연결 파일을 쓰고 있다면 "커서를 모릅니다" 오류가 납니다. 받아서 더블클릭한 뒤 다시 적용을 누르세요. 이번 버전부터는 자동으로 업데이트됩니다.
+      <div style="margin:10px 0"><a class="btn" href="Clickwee-Connect.bat" download id="noteDl" style="display:inline-block;text-decoration:none;padding:9px 16px;font-size:14px">연결 파일 받기</a></div>
+      이미 실행했는데 반응이 없으면 <kbd>Win</kbd>+<kbd>R</kbd>을 누르고 이 주소를 붙여넣으세요: <code></code> <button class="linkbtn" id="copyBtn">복사</button>`;
+    note.querySelector("#noteDl").addEventListener("click", ()=>setConnected());
   } else {
     note.innerHTML = `${label} 신호를 보냈습니다. 처음 받는 커서는 몇 초 걸립니다. 바뀌지 않으면 <kbd>Win</kbd>+<kbd>R</kbd>을 누르고 이 주소를 붙여넣으세요: <code></code> <button class="linkbtn" id="copyBtn">복사</button>`;
   }
