@@ -10,7 +10,8 @@ catalog.json at apply time, so nobody has to re-run the connect file.
 kinds
   upstream : Windows zip published by the author (ful1e5 layout: <name>-<Size>-Windows/)
   xcursor  : Linux X11 cursor theme, converted here into packs/<id>/<Size>.zip
-  recolor  : animated edition made from another theme's Windows files
+  recolor  : animated edition of another theme (effect: rainbow, neon, neon-pink,
+             bounce, wiggle, or colour+motion like "rainbow+bounce")
 """
 import hashlib
 import io
@@ -183,6 +184,7 @@ def hsv(h, s, v):
 
 
 def recolor_frame(img, effect, t, fill_dark):
+    """effect: rainbow | neon | neon-pink (colour only)"""
     a = np.asarray(img).astype(np.float32) / 255
     rgb, al = a[..., :3], a[..., 3:4]
     lum = rgb @ np.array([0.299, 0.587, 0.114], np.float32)
@@ -195,20 +197,36 @@ def recolor_frame(img, effect, t, fill_dark):
         out = rgb * (1 - w) + col * w
         return Image.fromarray((np.concatenate([out, al], -1) * 255).round().astype(np.uint8), "RGBA")
     base = {"neon": (0.16, 0.91, 1.0), "neon-pink": (1.0, 0.3, 0.75)}[effect]
-    pulse = 0.5 + 0.5 * np.cos(t * 2 * np.pi)
-    col = np.array(base, np.float32) * (0.7 + 0.3 * pulse)
+    pulse = float(0.5 + 0.5 * np.cos(t * 2 * np.pi))
+    col = np.array(base, np.float32) * (0.35 + 0.65 * pulse)
     out = rgb * (1 - w) + col * w
     core = Image.fromarray((np.concatenate([out, al], -1) * 255).round().astype(np.uint8), "RGBA")
-    # soft glow behind the shape
-    glow_a = (al[..., 0] * w[..., 0] * (0.35 + 0.5 * pulse) * 255).astype(np.uint8)
+    # glow behind the shape that swells and fades with the pulse
+    glow_a = np.clip(al[..., 0] * w[..., 0] * (0.15 + 1.6 * pulse), 0, 1) * 255
     glow = Image.new("RGBA", img.size, tuple(int(c * 255) for c in base) + (0,))
-    glow.putalpha(Image.fromarray(glow_a).filter(ImageFilter.GaussianBlur(img.width / 28)))
+    glow.putalpha(Image.fromarray(glow_a.astype(np.uint8)).filter(ImageFilter.GaussianBlur(img.width / 40 + img.width / 24 * pulse)))
     return Image.alpha_composite(glow, core)
 
 
+def move_frame(img, hx, hy, motion, t):
+    """motion: bounce | wiggle. The hotspot stays put so clicking stays exact."""
+    if motion == "bounce":
+        s = 0.8 + 0.2 * (0.5 + 0.5 * np.cos(t * 2 * np.pi))
+        w, h = max(1, round(img.width * s)), max(1, round(img.height * s))
+        out = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        out.paste(img.resize((w, h), Image.LANCZOS), (round(hx - hx * s), round(hy - hy * s)))
+        return out
+    angle = 14 * np.sin(t * 2 * np.pi)
+    return img.rotate(angle, resample=Image.BICUBIC, center=(hx, hy))
+
+
 def build_recolor(theme, base_root, out_dir):
+    """Animated edition of another theme. effect: colour and/or motion, e.g. "rainbow+bounce"."""
     src = size_dir(base_root, "Extra-Large")
-    fill_dark = theme["effect"] == "rainbow"
+    parts = theme["effect"].split("+")
+    color = next((x for x in parts if x in ("rainbow", "neon", "neon-pink")), None)
+    motion = next((x for x in parts if x in ("bounce", "wiggle")), None)
+    fill_dark = color == "rainbow"
     dirs = {}
     for size in SIZES:
         dirs[size] = out_dir / f"{theme['id']}-{size}-Windows"; dirs[size].mkdir(parents=True)
@@ -217,17 +235,21 @@ def build_recolor(theme, base_root, out_dir):
         if not p:
             continue
         frames = limit_frames(cl.read_windows_cursor(p))
-        # colour-animate the cursors people see most; the rest get one still frame
-        n = len(frames) if len(frames) > 1 else (12 if name in ANIMATED_ROLES else 1)
-        colored = []
+        moving = motion and name in ANIMATED_ROLES and len(frames) == 1
+        # animate the cursors people see most; the rest get one still frame
+        n = len(frames) if len(frames) > 1 else (16 if moving else 12 if (color and name in ANIMATED_ROLES) else 1)
+        out = []
         for i in range(n):
             img, hx, hy, delay = frames[i % len(frames)]
-            colored.append((recolor_frame(img, theme["effect"], i / n, fill_dark), hx, hy,
-                            delay if len(frames) > 1 else 90))
+            if color:
+                img = recolor_frame(img, color, i / n, fill_dark)
+            if moving:
+                img = move_frame(img, hx, hy, motion, i / n)
+            out.append((img, hx, hy, delay if len(frames) > 1 else (60 if moving else 90)))
         for size, scale in SIZES.items():
             # source is the Extra-Large build, whose shape fills the whole canvas
             write_role(dirs[size], name, [([cl.fit(img, hx, hy, img.width, c, scale) for c in CANVASES], d)
-                                          for img, hx, hy, d in colored])
+                                          for img, hx, hy, d in out])
 
 
 def zip_dir(src, dst):
@@ -319,7 +341,10 @@ def main():
             entry["tags"] = entry["tags"] + ["anim"]
         entry.update(urls=urls, rev=rev, hot=hot, anim=anim)
         catalog.append(entry)
-    data = {"version": 1, "themes": catalog}
+    import re
+    ver = int(re.search(r"^\$Version\s*=\s*(\d+)", (ROOT / "Clickwee.ps1").read_text(encoding="utf-8-sig"), re.M).group(1))
+    sha = hashlib.sha256((ROOT / "Clickwee.ps1").read_bytes()).hexdigest()
+    data = {"version": 1, "script": {"version": ver, "url": f"{REPO_RAW}/Clickwee.ps1", "sha256": sha}, "themes": catalog}
     (ROOT / "catalog.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"{len(catalog)} themes")
 

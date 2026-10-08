@@ -6,14 +6,14 @@
 #  -Theme X [-Size Regular|Large|Extra-Large] : apply directly (for testing)
 # This file is embedded in Clickwee-Connect.bat by tools/build_connect.py.
 param([string]$Uri = "", [switch]$Install, [switch]$Uninstall,
-      [string]$Theme = "", [string]$Size = "Regular", [switch]$Restore)
+      [string]$Theme = "", [string]$Size = "Regular", [switch]$Restore, [switch]$NoUpdate)
 
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -bor [Net.SecurityProtocolType]'Tls13' }
 catch { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 }
 
-$Version   = 3
+$Version   = 4   # catalog.json "script.version" above this makes installed copies update themselves
 $home2     = Join-Path $env:LOCALAPPDATA "Clickwee"
 $cache     = Join-Path $home2 "cache"
 $backupJs  = Join-Path $home2 "cursor-backup.json"
@@ -124,7 +124,9 @@ function Get-File($urlList, $out) {
   throw "파일을 내려받지 못했습니다. 인터넷 연결이나 보안 프로그램을 확인해 주세요.`n($first)"
 }
 
-function Get-ThemeInfo($t, $s) {
+$script:cat = $null
+function Get-Catalog {
+  if ($script:cat) { return $script:cat }
   New-Item -ItemType Directory -Force -Path $home2 | Out-Null
   $tmp = "$catalogFile.part"
   try {
@@ -134,7 +136,36 @@ function Get-ThemeInfo($t, $s) {
     Remove-Item $tmp -Force -ErrorAction SilentlyContinue
     if (-not (Test-Path $catalogFile)) { throw }
   }
-  $cat = [IO.File]::ReadAllText($catalogFile, [Text.Encoding]::UTF8) | ConvertFrom-Json
+  $script:cat = [IO.File]::ReadAllText($catalogFile, [Text.Encoding]::UTF8) | ConvertFrom-Json
+  return $script:cat
+}
+
+# Replace the installed script when the website publishes a newer one.
+# Returns $true when a new copy is in place (the caller then re-runs it).
+function Update-Self($cat) {
+  if ($NoUpdate -or -not $cat.script) { return $false }
+  try {
+    $want = [int]$cat.script.version
+    if ($want -le $Version -or $cat.script.url -notmatch $allowed) { return $false }
+    $target = Join-Path $home2 "Clickwee.ps1"
+    $new = "$target.new"
+    Get-File @($cat.script.url) $new
+    # must be exactly the file the catalog describes, and must parse
+    $hash = (Get-FileHash $new -Algorithm SHA256).Hash
+    $text = [IO.File]::ReadAllText($new, [Text.Encoding]::UTF8)
+    $errs = $null
+    [System.Management.Automation.Language.Parser]::ParseInput($text, [ref]$null, [ref]$errs) | Out-Null
+    $m = [regex]::Match($text, '(?m)^\$Version\s*=\s*(\d+)')
+    if ($hash -ne "$($cat.script.sha256)".ToUpper() -or $errs.Count -or -not $m.Success -or [int]$m.Groups[1].Value -ne $want) {
+      Remove-Item $new -Force; return $false
+    }
+    Move-Item $new $target -Force
+    return $true
+  } catch { return $false }
+}
+
+function Get-ThemeInfo($t, $s) {
+  $cat = Get-Catalog
   $info = $cat.themes | Where-Object { $_.id -eq $t } | Select-Object -First 1
   if (-not $info) { throw "'$t' 커서를 찾지 못했습니다. 페이지를 새로고침한 뒤 다시 눌러 주세요." }
   # packs converted by Clickwee come per size: .../packs/<id>/{size}.zip
@@ -261,6 +292,10 @@ try {
       }
       "apply" {
         if ($parts.Count -lt 2) { break }
+        if (Update-Self (Get-Catalog)) {
+          & (Join-Path $home2 "Clickwee.ps1") -Uri $Uri -NoUpdate
+          return
+        }
         $s = "Regular"; if ($parts.Count -ge 3) { $s = $parts[2] }
         $name = Apply-Theme $parts[1] $s
         Notify "$name 커서를 적용했습니다."

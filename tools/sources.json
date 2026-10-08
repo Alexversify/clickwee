@@ -1224,5 +1224,148 @@
   "kind": "recolor",
   "base": "GoogleDot-Black",
   "effect": "rainbow"
+ },
+ {
+  "id": "Bibata-Bounce",
+  "name": "Bibata Bounce",
+  "desc": "통통 튀는 블랙 커서",
+  "tags": [
+   "black",
+   "anim",
+   "modern"
+  ],
+  "dark": false,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "recolor",
+  "base": "Bibata-Modern-Classic",
+  "effect": "bounce"
+ },
+ {
+  "id": "Bibata-Ice-Wiggle",
+  "name": "Bibata Ice Wiggle",
+  "desc": "살랑살랑 흔들리는 화이트",
+  "tags": [
+   "white",
+   "anim",
+   "modern"
+  ],
+  "dark": true,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "recolor",
+  "base": "Bibata-Modern-Ice",
+  "effect": "wiggle"
+ },
+ {
+  "id": "Rainbow-Bounce",
+  "name": "Rainbow Bounce",
+  "desc": "무지개색으로 통통 튀는 커서",
+  "tags": [
+   "color",
+   "anim",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "recolor",
+  "base": "Bibata-Modern-Classic",
+  "effect": "rainbow+bounce"
+ },
+ {
+  "id": "Neon-Wiggle",
+  "name": "Neon Wiggle",
+  "desc": "네온 빛으로 흔들리는 커서",
+  "tags": [
+   "color",
+   "anim"
+  ],
+  "dark": true,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Bibata_Cursor",
+  "kind": "recolor",
+  "base": "Bibata-Modern-Ice",
+  "effect": "neon+wiggle"
+ },
+ {
+  "id": "Banana-Swing",
+  "name": "Banana Swing",
+  "desc": "흔들흔들 춤추는 바나나",
+  "tags": [
+   "color",
+   "anim",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/banana-cursor",
+  "kind": "recolor",
+  "base": "Banana",
+  "effect": "wiggle"
+ },
+ {
+  "id": "Fuchsia-Bounce",
+  "name": "Fuchsia Bounce",
+  "desc": "말랑말랑 튀는 핑크 물방울",
+  "tags": [
+   "color",
+   "anim",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/fuchsia-cursor",
+  "kind": "recolor",
+  "base": "Fuchsia",
+  "effect": "bounce"
+ },
+ {
+  "id": "Dot-Heartbeat",
+  "name": "Dot Heartbeat",
+  "desc": "두근두근 뛰는 빨간 점",
+  "tags": [
+   "color",
+   "anim",
+   "cute"
+  ],
+  "dark": false,
+  "author": "ful1e5, Clickwee",
+  "license": "GPL-3.0",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "source": "https://github.com/ful1e5/Google_Cursor",
+  "kind": "recolor",
+  "base": "GoogleDot-Red",
+  "effect": "bounce"
+ },
+ {
+  "id": "Catppuccin-Wiggle",
+  "name": "Catppuccin Wiggle",
+  "desc": "흔들리는 파스텔 보라",
+  "tags": [
+   "color",
+   "anim",
+   "cute"
+  ],
+  "dark": false,
+  "author": "Catppuccin, Clickwee",
+  "license": "GPL-2.0",
+  "licenseUrl": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+  "source": "https://github.com/catppuccin/cursors",
+  "kind": "recolor",
+  "base": "Catppuccin-mocha-mauve",
+  "effect": "wiggle"
  }
 ]

@@ -38,7 +38,7 @@ https://clickwee.com
 | --- | --- | --- |
 | `upstream` | 작가가 직접 낸 Windows 빌드 (ful1e5의 Bibata, BreezeX, XCursor-pro, apple_cursor, Google_Cursor, fuchsia, banana) | 작가의 GitHub 릴리스 |
 | `xcursor` | 리눅스 전용 커서 (Bibata Extra, Phinger, Catppuccin, Vimix, WhiteSur, McMojave, Layan, Graphite, Qogir, Future) | 변환해서 `packs/` |
-| `recolor` | 움직이는 에디션 (Rainbow, Neon). Bibata, GoogleDot에 색 애니메이션을 입힌 것 | `packs/` |
+| `recolor` | 움직이는 에디션. 색(rainbow, neon)과 동작(bounce 통통, wiggle 흔들흔들)을 다른 테마에 입힌 것, `rainbow+bounce`처럼 조합 가능 | `packs/` |
 
 변환본에는 원본 LICENSE와 출처를 담은 README.txt가 들어가고, 사이트 하단 "만든 사람들"에
 `catalog.json` 기준으로 프로젝트, 작가, 라이선스가 자동 표시된다. macOS, Google은 상표이므로 광고
@@ -52,7 +52,9 @@ https://clickwee.com
 
 `tags`: `black`, `white`, `color`, `cute`, `modern`, `mac`, `lefty`, `anim`(포인터가 움직임, 자동 감지)
 
-`Clickwee.ps1`을 고쳤을 때만 `python3 tools/build_connect.py`로 연결 파일을 다시 만든다.
+`Clickwee.ps1`을 고쳤으면 `$Version`을 올리고 `python3 tools/build_connect.py`, `python3 tools/build_catalog.py` 순서로 실행한다.
+`catalog.json`의 `script`(버전, 주소, SHA-256)를 보고 설치된 PC들이 다음 적용 때 스스로 업데이트한다
+(해시가 맞지 않거나 문법 오류가 있으면 기존 것을 유지).
 
 ## 배포
 
