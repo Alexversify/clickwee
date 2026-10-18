@@ -52,6 +52,17 @@ https://clickwee.com
 
 `tags`: `black`, `white`, `color`, `cute`, `modern`, `mac`, `lefty`, `anim`(포인터가 움직임, 자동 감지)
 
+### 프레임레이트 (120/144Hz 모니터)
+
+Windows는 .ani 프레임 길이를 지피(1/60초) 단위로만 재생하므로 상한이 60fps다. 움직이는 커서는
+30fps(2지피)로 만든다. `MAX_FRAMES`로 프레임을 병합해 용량을 줄일 때도 `MIN_FPS`(25) 아래로는
+내려가지 않는다. 예전 빌드는 상한 24프레임 때문에 업스트림의 54프레임 30fps 스피너가 18프레임
+10fps로 뭉개져 고주사율 화면에서 끊겨 보였다.
+
+미리보기는 `PREVIEW_PX`(96px)로 저장해 200% 배율에서도 선명하고, 갤러리 카드는 용량 때문에
+`CARD_PX`(48px)에 `CARD_MAX`(18) 프레임으로 줄인 `<role>-card.png`를 따로 쓴다
+(`catalog.json`의 `card`: `[프레임 수, 한 바퀴 ms]`).
+
 `Clickwee.ps1`을 고쳤으면 `$Version`을 올리고 `python3 tools/build_connect.py`, `python3 tools/build_catalog.py` 순서로 실행한다.
 `catalog.json`의 `script`(버전, 주소, SHA-256)를 보고 설치된 PC들이 다음 적용 때 스스로 업데이트한다
 (해시가 맞지 않거나 문법 오류가 있으면 기존 것을 유지).

@@ -134,6 +134,15 @@ h1{font-size:clamp(34px,5.2vw,64px);line-height:1.08;letter-spacing:-.035em;font
 .steps h3{margin:0 0 6px;font-size:17px}
 .steps p{font-size:14.5px}
 .steps .btn{display:inline-block;text-decoration:none;margin-top:14px;padding:10px 16px;font-size:14px}
+.tip{grid-column:1/-1;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+.tip summary{font-weight:600;font-size:15px;list-style:none}
+.tip summary::-webkit-details-marker{display:none}
+.tip summary::before{content:"+ ";color:var(--graphite)}
+.tip[open] summary::before{content:"- "}
+.tip p,.tip li{color:var(--graphite);font-size:14.5px}
+.tip p{margin:12px 0 0;max-width:80ch}
+.tip ul{margin:10px 0 0;padding-left:18px;max-width:80ch;display:grid;gap:6px}
+.tip b{color:var(--ink)}
 .credits{margin-top:72px}
 .credits p{color:var(--graphite);margin:0 0 14px;max-width:70ch;font-size:14.5px}
 .credits ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px 20px;font-size:14px}
@@ -209,6 +218,16 @@ footer a{color:inherit}
       <li><h3>더블클릭</h3><p>받은 <b>Clickwee-Connect.bat</b>을 더블클릭합니다. 파란 경고창이 뜨면 추가 정보, 실행을 누르세요. 창은 자동으로 닫힙니다.</p></li>
       <li><h3>끝, 이제 클릭만</h3><p>이 페이지로 돌아와 적용을 누르고, 브라우저가 열지 물으면 허용합니다. "항상 허용"을 체크하면 다음부터는 클릭 즉시 바뀝니다.</p></li>
     </ol>
+    <details class="tip">
+      <summary>120Hz, 144Hz 모니터인데 커서가 끊겨 보인다면</summary>
+      <p>Clickwee의 움직이는 커서는 Windows가 허용하는 최대치에 가까운 30fps로 만들고, 고해상도 화면을 위해 32·48·64·96px 네 가지를 함께 넣습니다. 그래도 포인터 자체가 툭툭 끊긴다면 커서 그림이 아니라 PC 설정 문제일 가능성이 큽니다. 아래 세 가지를 확인해 보세요.</p>
+      <ul>
+        <li><b>마우스 폴링레이트</b>: 저가형 마우스는 초당 125번만 위치를 보고합니다. 144Hz 화면에서는 이게 가장 큰 원인입니다. 마우스 제조사 프로그램에서 1000Hz로 올리세요.</li>
+        <li><b>모니터 주사율</b>: 설정 &gt; 시스템 &gt; 디스플레이 &gt; 고급 디스플레이에서 실제로 120Hz, 144Hz가 선택돼 있는지 확인하세요. 케이블이나 드라이버 문제로 60Hz로 돌아가 있는 경우가 많습니다.</li>
+        <li><b>포인터 자국</b>: 설정에서 마우스 &gt; 추가 마우스 설정 &gt; 포인터 옵션의 "포인터 자국 표시"가 켜져 있으면 잔상이 남아 끊겨 보입니다.</li>
+      </ul>
+      <p>주사율이 서로 다른 모니터를 함께 쓰면 Windows가 낮은 쪽에 맞춰 커서를 그리는 경우도 있습니다.</p>
+    </details>
   </section>
 
   <section class="credits" id="credits">
@@ -244,12 +263,25 @@ function loadImage(src){
   if (!imgCache[src]) imgCache[src] = new Promise((res, rej)=>{ const i = new Image(); i.onload = ()=>res(i); i.onerror = rej; i.src = src; });
   return imgCache[src];
 }
-// one frame (sx) of an image, scaled to px, as a data URL usable in CSS cursor
-function frameURL(img, sx, px){
-  const c = document.createElement("canvas"); c.width = c.height = px;
+// Draw the cursor at the screen's real pixel density, so it stays sharp on 4K and on
+// 125~200% scaling instead of being blurred up from a 32px bitmap. Chrome ignores a
+// custom cursor over 128 device px, so the bitmap is capped there and image-set() tells
+// the browser the density it was drawn at.
+const SETOK = (()=>{ try { return CSS.supports("cursor", "image-set(url('a.png') 2x) 0 0, auto"); } catch(e){ return false; } })();
+function density(px){
+  const want = SETOK ? Math.min(3, Math.max(1, window.devicePixelRatio || 1)) : 1;
+  const dev = Math.min(128, Math.round(px * want));
+  return {dev, ratio: dev / px};
+}
+// one frame of a strip (fw wide, starting at sx) as a ready-to-use CSS cursor value
+function frameCSS(img, sx, fw, px, hx, hy, fb){
+  const {dev, ratio} = density(px);
+  const c = document.createElement("canvas"); c.width = c.height = dev;
   const g = c.getContext("2d"); g.imageSmoothingQuality = "high";
-  g.drawImage(img, sx, 0, 64, Math.min(64, img.height), 0, 0, px, px * Math.min(64, img.height) / 64);
-  return c.toDataURL("image/png");
+  const fh = Math.min(fw, img.height);
+  g.drawImage(img, sx, 0, fw, fh, 0, 0, dev, dev * fh / fw);
+  const u = c.toDataURL("image/png");
+  return (ratio === 1 ? `url(${u})` : `image-set(url(${u}) ${ratio.toFixed(3)}x)`) + ` ${hx} ${hy}, ${fb}`;
 }
 
 const ROLE_CSS = [
@@ -268,7 +300,7 @@ const ROLE_CSS = [
 async function applyPreview(){
   if (!theme) return;
   const t = theme, px = SIZE_PX[size];
-  clearInterval(animTimer);
+  cancelAnimationFrame(animTimer);
   // static frame for every role, plus the frame lists of animated roles
   const roles = await Promise.all(ROLE_CSS.map(async ([role, sel, fb])=>{
     const hot = t.hot[role];
@@ -277,32 +309,44 @@ async function applyPreview(){
     try {
       if (t.anim[role]) {
         const img = await loadImage(pv(t.id, role + "-strip"));
-        const n = t.anim[role].length;
-        const frames = Array.from({length:n}, (_, i)=>frameURL(img, i*64, px));
+        const n = t.anim[role].length, fw = img.width / n;
+        const frames = Array.from({length:n}, (_, i)=>frameCSS(img, i*fw, fw, px, hx, hy, fb));
         return {sel, fb, hx, hy, frames, delays:t.anim[role]};
       }
       const img = await loadImage(pv(t.id, role));
-      return {sel, fb, hx, hy, frames:[frameURL(img, 0, px)]};
+      return {sel, fb, hx, hy, frames:[frameCSS(img, 0, img.width, px, hx, hy, fb)]};
     } catch(e){ return {sel, fb, frames:null}; }
   }));
   if (theme !== t) return;   // user picked another card meanwhile
-  const pos = roles.map(()=>0), due = roles.map(r=>r.delays ? r.delays[0] : Infinity);
-  const write = ()=>{
-    $("cursor-rules").textContent = roles.map((r, i)=> r.frames
-      ? `${r.sel}{cursor:url(${r.frames[pos[i]]}) ${r.hx} ${r.hy}, ${r.fb}}` : "").join("\n");
-  };
-  write();
-  if (roles.some(r=>r.delays) && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    let last = performance.now();
-    animTimer = setInterval(()=>{
-      const now = performance.now(), dt = now - last; last = now; let changed = false;
-      roles.forEach((r, i)=>{
-        if (!r.delays) return;
-        due[i] -= dt;
-        while (due[i] <= 0) { pos[i] = (pos[i]+1) % r.frames.length; due[i] += r.delays[pos[i]]; changed = true; }
-      });
-      if (changed) write();
-    }, 30);
+  // One rule per role, written once. Each frame then changes only that one rule's
+  // cursor, instead of re-parsing the whole stylesheet 33 times a second.
+  const live = [];
+  const st = $("cursor-rules");
+  st.textContent = roles.filter(r=>r.frames).map(r=>`${r.sel}{cursor:${r.frames[0]}}`).join("\n");
+  const rules = st.sheet ? st.sheet.cssRules : null;
+  let i = 0;
+  roles.forEach(r=>{
+    if (!r.frames) return;
+    const rule = rules && rules[i]; i++;
+    if (!rule || !r.delays || r.frames.length < 2) return;
+    let end = 0;
+    const cum = r.delays.map(d=>(end += Math.max(16, d)));
+    live.push({rule, frames:r.frames, cum, total:end, at:0});
+  });
+  if (live.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // driven by the display, so frames land on real refreshes (144 Hz included)
+    const start = performance.now();
+    const tick = now=>{
+      if (theme !== t) return;
+      for (const L of live) {
+        const e = (now - start) % L.total;
+        let j = L.cum.findIndex(c=>e < c);
+        if (j < 0) j = 0;
+        if (j !== L.at) { L.at = j; L.rule.style.setProperty("cursor", L.frames[j]); }
+      }
+      animTimer = requestAnimationFrame(tick);
+    };
+    animTimer = requestAnimationFrame(tick);
   }
   $("stage").classList.toggle("dark", t.dark);
   $("pickedName").textContent = t.name;
@@ -320,8 +364,11 @@ function matches(t){
 }
 
 function animEl(t, role){
-  const n = t.anim[role].length, ms = t.anim[role].reduce((a,b)=>a+b, 0);
-  return `<span class="anim" style="background-image:url('${pv(t.id, role + "-strip")}');--n:${n};animation:spin-strip ${ms}ms steps(${n}) infinite"></span>`;
+  // the gallery uses the light card strip; the full-rate one is only for the live cursor
+  const c = t.card && t.card[role];
+  const n = c ? c[0] : t.anim[role].length;
+  const ms = c ? c[1] : t.anim[role].reduce((a,b)=>a+b, 0);
+  return `<span class="anim" style="background-image:url('${pv(t.id, role + (c ? "-card" : "-strip"))}');--n:${n};animation:spin-strip ${ms}ms steps(${n}) infinite"></span>`;
 }
 
 function renderGrid(){

@@ -69,8 +69,17 @@ WIN_ALIASES = {
 # preview role on the website -> Windows file
 PREVIEW = {"default": "Pointer", "pointer": "Link", "text": "Text", "move": "Move", "nwse": "Dgn1",
            "help": "Help", "notallowed": "Unavailable", "crosshair": "Cross", "busy": "Busy", "work": "Work"}
-MAX_FRAMES = 24
+# Windows plays .ani frames in jiffies (1/60 s), so 60 fps is the ceiling. Keep enough
+# frames for the original timing: merging frames to save space drops the frame rate, and
+# anything under ~25 fps visibly stutters on a 120/144 Hz monitor.
+MAX_FRAMES = 64
+MIN_FPS = 25                  # merge frames only while the result stays above this
+MOTION_FRAMES = 30            # generated bounce/wiggle/colour editions: 30 frames
+MOTION_DELAY = 33             # ... at 33 ms = 2 jiffies = 30 fps, a 1 s loop
 ANIMATED_ROLES = {"Pointer", "Link", "Help", "Alternate"}
+PREVIEW_PX = 96               # preview bitmap edge: enough for a crisp cursor at 200% scaling
+CARD_PX = 48                  # gallery icon strip: small and few frames, it is a 20px icon
+CARD_MAX = 18
 
 
 # ------------------------------------------------------------------ fetching
@@ -124,9 +133,15 @@ def resolve_x11(d, names):
 
 
 def limit_frames(frames):
+    """Cap the frame count, but never at the cost of a stuttering frame rate."""
     if len(frames) <= MAX_FRAMES:
         return frames
     k = -(-len(frames) // MAX_FRAMES)
+    # merging k frames into one multiplies each delay by k; stop if that drops below MIN_FPS
+    while k > 1 and min(sum(f[3] or 50 for f in frames[i:i + k]) for i in range(0, len(frames), k)) > 1000 / MIN_FPS:
+        k -= 1
+    if k <= 1:
+        return frames
     out = []
     for i in range(0, len(frames), k):
         grp = frames[i:i + k]
@@ -237,7 +252,8 @@ def build_recolor(theme, base_root, out_dir):
         frames = limit_frames(cl.read_windows_cursor(p))
         moving = motion and name in ANIMATED_ROLES and len(frames) == 1
         # animate the cursors people see most; the rest get one still frame
-        n = len(frames) if len(frames) > 1 else (16 if moving else 12 if (color and name in ANIMATED_ROLES) else 1)
+        generated = moving or (color and name in ANIMATED_ROLES)
+        n = len(frames) if len(frames) > 1 else (MOTION_FRAMES if generated else 1)
         out = []
         for i in range(n):
             img, hx, hy, delay = frames[i % len(frames)]
@@ -245,7 +261,7 @@ def build_recolor(theme, base_root, out_dir):
                 img = recolor_frame(img, color, i / n, fill_dark)
             if moving:
                 img = move_frame(img, hx, hy, motion, i / n)
-            out.append((img, hx, hy, delay if len(frames) > 1 else (60 if moving else 90)))
+            out.append((img, hx, hy, delay if len(frames) > 1 else MOTION_DELAY))
         for size, scale in SIZES.items():
             # source is the Extra-Large build, whose shape fills the whole canvas
             write_role(dirs[size], name, [([cl.fit(img, hx, hy, img.width, c, scale) for c in CANVASES], d)
@@ -274,24 +290,36 @@ def readme(theme):
 def write_previews(theme, regular_dir):
     out = ROOT / "previews" / theme["id"]
     shutil.rmtree(out, ignore_errors=True); out.mkdir(parents=True)
-    hot, anim = {}, {}
+    hot, anim, card = {}, {}, {}
     for role, name in PREVIEW.items():
         p = find_win_file(regular_dir, name)
         if not p:
             continue
         frames = limit_frames(cl.read_windows_cursor(p))
         img, hx, hy, _ = frames[0]
-        f = 64 / img.width
-        small = [fr[0].resize((64, round(fr[0].height * f)), Image.LANCZOS) for fr in frames]
-        small[0].save(out / f"{role}.png", optimize=True)
+
+        def strip_of(px, chosen, path):
+            f = px / chosen[0][0].width
+            small = [fr[0].resize((px, max(1, round(fr[0].height * f))), Image.LANCZOS) for fr in chosen]
+            im = small[0] if len(small) == 1 else Image.new("RGBA", (px * len(small), small[0].height))
+            if len(small) > 1:
+                for i, s in enumerate(small):
+                    im.paste(s, (px * i, 0))
+            im.save(path, optimize=True)
+
+        strip_of(PREVIEW_PX, frames[:1], out / f"{role}.png")
         hot[role] = [round(hx / img.width, 4), round(hy / img.height, 4)]
         if len(frames) > 1:
-            strip = Image.new("RGBA", (64 * len(small), small[0].height))
-            for i, s in enumerate(small):
-                strip.paste(s, (64 * i, 0))
-            strip.save(out / f"{role}-strip.png", optimize=True)
+            # full rate, full size: this one becomes the live cursor on the page
+            strip_of(PREVIEW_PX, frames, out / f"{role}-strip.png")
             anim[role] = [max(20, fr[3] or 50) for fr in frames]
-    return hot, anim
+            # the gallery shows ~20px icons for 77 themes, so those get a light strip:
+            # a 54-frame 96px one is ~120 KB a piece and would make the page crawl
+            k = -(-len(frames) // CARD_MAX)
+            chosen = frames[::k]
+            strip_of(CARD_PX, chosen, out / f"{role}-card.png")
+            card[role] = [len(chosen), sum(max(20, fr[3] or 50) for fr in frames)]
+    return hot, anim, card
 
 
 # ------------------------------------------------------------------ main
@@ -300,7 +328,28 @@ def main():
     built = {}
     catalog = []
     (ROOT / "packs").mkdir(exist_ok=True)
+    # --only a,b : rebuild just these (plus the bases they are built from) and keep the
+    # catalog entries of everything else. Lets one theme be fixed without a full rebuild.
+    only = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--only=")), None)
+    wanted, old = None, {}
+    if only:
+        by_id = {t["id"]: t for t in themes}
+        wanted = set()
+        queue = [s.strip() for s in only.split(",") if s.strip()]
+        while queue:
+            i = queue.pop()
+            if i in wanted or i not in by_id:
+                continue
+            wanted.add(i)
+            if by_id[i].get("base"):
+                queue.append(by_id[i]["base"])
+        old = {e["id"]: e for e in json.load(open(ROOT / "catalog.json", encoding="utf-8"))["themes"]}
+        print("only:", ", ".join(sorted(wanted)))
     for t in themes:
+        if wanted is not None and t["id"] not in wanted:
+            if t["id"] in old:
+                catalog.append(old[t["id"]])
+                continue
         print(t["id"])
         work = CACHE / "work" / t["id"]
         if t["kind"] == "upstream":
@@ -313,7 +362,7 @@ def main():
         else:
             packdir = ROOT / "packs" / t["id"]
             root = work
-            if FORCE or not (packdir / "Regular.zip").exists() or not work.exists():
+            if FORCE or wanted is not None or not (packdir / "Regular.zip").exists() or not work.exists():
                 shutil.rmtree(work, ignore_errors=True); work.mkdir(parents=True)
                 if t["kind"] == "xcursor":
                     src = fetch(t["fetch"]) / t["path"]
@@ -335,11 +384,11 @@ def main():
             rev = h.hexdigest()[:10]
             urls = [f"{REPO_RAW}/packs/{t['id']}/{{size}}.zip", f"{REPO_CDN}/packs/{t['id']}/{{size}}.zip"]
         built[t["id"]] = root
-        hot, anim = write_previews(t, size_dir(root, "Regular"))
+        hot, anim, card = write_previews(t, size_dir(root, "Regular"))
         entry = {k: t[k] for k in ("id", "name", "desc", "tags", "dark", "author", "license", "licenseUrl", "source")}
         if anim.get("default") and "anim" not in entry["tags"]:
             entry["tags"] = entry["tags"] + ["anim"]
-        entry.update(urls=urls, rev=rev, hot=hot, anim=anim)
+        entry.update(urls=urls, rev=rev, hot=hot, anim=anim, card=card)
         catalog.append(entry)
     import re
     ver = int(re.search(r"^\$Version\s*=\s*(\d+)", (ROOT / "Clickwee.ps1").read_text(encoding="utf-8-sig"), re.M).group(1))
